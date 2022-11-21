@@ -80,7 +80,7 @@
     </style>
     <script type="text/javascript">
         Array.prototype.random = function () {
-          return this[Math.floor((Math.random()*this.length))];
+          return this[Math.floor((Math.random() * this.length))];
         }
 
         function randomize() {
@@ -90,7 +90,19 @@
             }
             const randomClan = selectedClans.random() || "question-mark"; 
             document.getElementById("selected-clan-image").setAttribute("src", `images/${randomClan}.png`)
+            if (randomClan in clanStats) {
+                clanStats[randomClan] += 1;
+            } else {
+                clanStats[randomClan] = 1;
+            }
         }
+        // Show how many times each clan was picked when you press ctrl+d
+        const clanStats = {};q
+        document.addEventListener('keydown', function(event) {
+          if (event.ctrlKey && event.key === 'd') {
+            alert(JSON.stringify(clanStats, null, " ".repeat(4)))
+          }
+        });
     </script>
 </head>
 <body>
