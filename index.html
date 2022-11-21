@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Northgard Clan Randomizer</title>
-    <meta property=’og:title’ content='Northgard Clan Randomizer'/>
-    <meta property=’og:image’ content='images/northgard-stylized.png'/>
-    <meta property=’og:description’ content='Get a random clan that you like'/>
-    <meta property=’og:url’ content='https://nangelv.github.io/northgard-clan-randomizer/'/>
-    <meta property='og:image:width' content='1200' />
-    <meta property='og:image:height' content='627' />
-    <meta property="og:type" content='website'/>
+    <meta property="og:title" content="Northgard Clan Randomizer"/>
+    <meta property="og:image" content="https://nangelv.github.io/northgard-clan-randomizer/images/northgard-stylized.png"/>
+    <meta property="og:description" content="Get a random clan that you like"/>
+    <meta property="og:url" content="https://nangelv.github.io/northgard-clan-randomizer"/>
+    <meta property="og:image:width" content="64" />
+    <meta property="og:image:height" content="64" />
+    <meta property="og:type" content="website"/>
     <link rel="icon" type="image/png" href="images/northgard-stylized.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
     <style type="text/css">
         body {
-            font-family: 'Smythe', cursive;
+            font-family: "Smythe", cursive;
         }
         header {
             text-align: center;
@@ -47,7 +47,7 @@
         }
         div{
             clear: right;
-            content: '';
+            content: "";
             vertical-align: middle;
         }
         h2 {
@@ -85,7 +85,7 @@
 
         function randomize() {
             const selectedClans = [];
-            for (const selectedClan of document.querySelectorAll('input[type=checkbox]:checked')) {
+            for (const selectedClan of document.querySelectorAll("input[type=checkbox]:checked")) {
               selectedClans.push(selectedClan.value)
             }
             const randomClan = selectedClans.random() || "question-mark"; 
