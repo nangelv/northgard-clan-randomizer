@@ -97,7 +97,7 @@
             }
         }
         // Show how many times each clan was picked when you press ctrl+d
-        const clanStats = {};q
+        const clanStats = {};
         document.addEventListener('keydown', function(event) {
           if (event.ctrlKey && event.key === 'd') {
             alert(JSON.stringify(clanStats, null, " ".repeat(4)))
