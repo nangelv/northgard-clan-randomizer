@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northgard Clan Randomizer</title>
+    <link rel="icon" type="image/png" href="northgard-stylized.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    <style type="text/css">
+        body {
+            font-family: 'Smythe', cursive;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        main {
+            max-width: 960px;
+            margin: auto;
+        }
+        label + a>img {
+            width: 2rem;
+            height: 2rem;
+            float: right;
+            padding: 0.3rem 0px;
+        }
+        legend, label {
+            font-size: 1.5rem;
+        }
+        label {
+            padding-top: 0.3rem;
+        }
+        input[type=checkbox]
+        {
+            transform: scale(1.5);
+            margin: 1rem;
+        }
+        div{
+            clear: right;
+            content: '';
+            vertical-align: middle;
+        }
+        h2 {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: grey;
+        }
+        button {
+            background-color: #34454f;
+            color: white;
+        }
+        #selected-clan-image {
+            width: 8rem;
+            height: 8rem;
+            background-color: #34454f;
+            border: 2px solid black;
+            border-radius: 50%;
+        }
+        #selected-clan {
+            margin-bottom: 30px;
+        }
+        #clans {
+            width: 75%;
+            margin: auto;   
+        }
+        #randomizer {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+    </style>
+    <script type="text/javascript">
+        Array.prototype.random = function () {
+          return this[Math.floor((Math.random()*this.length))];
+        }
+
+        function randomize() {
+            const selectedClans = [];
+            for (const selectedClan of document.querySelectorAll('input[type=checkbox]:checked')) {
+              selectedClans.push(selectedClan.value)
+            }
+            const randomClan = selectedClans.random() || "question-mark"; 
+            document.getElementById("selected-clan-image").setAttribute("src", `${randomClan}.png`)
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Northgard Clan Randomizer</h1>
+        <h2>Get a random clan that you like</h2>
+    </header>
+    <main>
+        <div id="randomizer">
+            <div id="selected-clan"><img id="selected-clan-image" src="images/question-mark.png" alt="random"></div>
+            <button onclick="randomize()">RANDOMIZE</button>
+        </div>
+        
+        <fieldset id="clans">
+            <legend>Clans you like to play</legend>
+            <div>
+                <input type="checkbox" id="stag" name="clan" value="stag" checked>
+                <label for="stag">Eikthyrnir - The Clan of the Stags</label>
+                <a href="https://northgard.fandom.com/wiki/Eikthyrnir" target="_blank"><img src="images/stag.png"></a>
+            </div>
+
+            <div>
+                <input type="checkbox" id="goat" name="clan" value="goat" checked>
+                <label for="goat">Heidrun - The Clan of the Goat</label>
+                <a href="https://northgard.fandom.com/wiki/Heidrun" target="_blank"><img src="images/goat.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="wolf" name="clan" value="wolf" checked>
+                <label for="wolf">Fenrir - The Clan of the Wolf</label>
+                <a href="https://northgard.fandom.com/wiki/Fenrir" target="_blank"><img src="images/wolf.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="raven" name="clan" value="raven" checked>
+                <label for="raven">Huginn and Muninn - The Clan of the Raven</label>
+                <a href="https://northgard.fandom.com/wiki/Huginn_and_Muninn" target="_blank"><img src="images/raven.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="bear" name="clan" value="bear" checked>
+                <label for="bear">Bjarki - The Clan of the Bear</label>
+                <a href="https://northgard.fandom.com/wiki/Bjarki" target="_blank"><img src="images/bear.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="boar" name="clan" value="boar" checked>
+                <label for="boar">Slidrugtanni - The Clan of the Boar</label>
+                <a href="https://northgard.fandom.com/wiki/Slidrugtanni" target="_blank"><img src="images/boar.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="snake" name="clan" value="snake" checked>
+                <label for="snake">Sváfnir - The Clan of the Snake</label>
+                <a href="https://northgard.fandom.com/wiki/Sváfnir" target="_blank"><img src="images/snake.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="dragon" name="clan" value="dragon" checked>
+                <label for="dragon">Nidhogg - The Clan of the Dragon</label>
+                <a href="https://northgard.fandom.com/wiki/Nidhogg" target="_blank"><img src="images/dragon.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="horse" name="clan" value="horse" checked>
+                <label for="horse">Svadilfari - The Clan of the Horse</label>
+                <a href="https://northgard.fandom.com/wiki/Svadilfari" target="_blank"><img src="images/horse.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="kraken" name="clan" value="kraken" checked>
+                <label for="kraken">Lyngbakr - The Clan of the Kraken</label>
+                <a href="https://northgard.fandom.com/wiki/Lyngbakr" target="_blank"><img src="images/kraken.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="ox" name="clan" value="ox" checked>
+                <label for="ox">Himminbrjotir - The Clan of the Ox</label>
+                <a href="https://northgard.fandom.com/wiki/Himminbrjotir" target="_blank"><img src="images/ox.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="lynx" name="clan" value="lynx" checked>
+                <label for="lynx">Brundr and Kaelinn - The Clan of the Lynx</label>
+                <a href="https://northgard.fandom.com/wiki/Brundr_and_Kaelinn" target="_blank"><img src="images/lynx.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="squirrel" name="clan" value="squirrel" checked>
+                <label for="squirrel">Ratatoskr - The clan of the Squirrel</label>
+                <a href="https://northgard.fandom.com/wiki/Ratatoskr" target="_blank"><img src="images/squirrel.png"></a>
+            </div>
+            <div>
+                <input type="checkbox" id="rat" name="clan" value="rat" checked>
+                <label for="rat">Dodsvagr - The Clan of the Rat</label>
+                <a href="https://northgard.fandom.com/wiki/Dodsvagr" target="_blank"><img src="images/rat.png"></a>
+            </div>
+        </fieldset>
+    </main>
+</body>
+</html>
