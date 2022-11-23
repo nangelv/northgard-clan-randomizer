@@ -90,16 +90,18 @@
             for (const selectedClan of document.querySelectorAll("input[type=checkbox]:checked")) {
               selectedClans.push(selectedClan.value)
             }
-            const randomClan = selectedClans.random() || "question-mark"; 
-            document.getElementById("selected-clan-image").setAttribute("src", `images/${randomClan}.png`)
-            let previousOccurances = Number(localStorage.getItem(randomClan) || 0);
-            localStorage.setItem(randomClan, previousOccurances + 1);
+            const randomClan = selectedClans.random(); 
+            document.getElementById("selected-clan-image").setAttribute("src", `images/${randomClan || "question-mark"}.png`)
+            // Store statistics
+            if (randomClan) {
+                let previousOccurances = Number(localStorage.getItem(randomClan) || 0);
+                localStorage.setItem(randomClan, previousOccurances + 1);
+            }
         }
 
         // Show how many times each clan was picked when you press ctrl+d
         document.addEventListener('keydown', function(event) {
             if (!(event.ctrlKey && event.key === 'd')) return;
-            console.log("Showing clan stats")
             // Get local storage data for all clans
             const clanStats = [];
             document.querySelectorAll("input[type=checkbox]").forEach(it => {
@@ -113,6 +115,20 @@
             // Show stats as alert
             alert("⚔️ Your top clans:\n" + topClans);
         });
+
+        // Record excluded clans in local storage so they can be restored if the page is closed
+        function clanToggle(element) {
+            const clan = element.value;
+            const excludedClans = new Set(localStorage.getItem("_excluded")?.split(",").filter(it => it != "") || []);
+
+            if (element.checked) {
+                excludedClans.delete(clan);
+            } else {
+                excludedClans.add(clan);
+            }
+
+            localStorage.setItem("_excluded", excludedClans.size == 0 ? "" : Array.from(excludedClans).join());
+        }
     </script>
 </head>
 <body>
@@ -129,77 +145,85 @@
         <fieldset id="clans">
             <legend>Clans you like to play</legend>
             <div>
-                <input type="checkbox" id="stag" name="clan" value="stag" checked>
+                <input type="checkbox" id="stag" name="clan" value="stag" onclick="clanToggle(this)" checked>
                 <label for="stag">Eikthyrnir - The Clan of the Stag</label>
                 <a href="https://northgard.fandom.com/wiki/Eikthyrnir" target="_blank"><img src="images/stag.png"></a>
             </div>
 
             <div>
-                <input type="checkbox" id="goat" name="clan" value="goat" checked>
+                <input type="checkbox" id="goat" name="clan" value="goat" onclick="clanToggle(this)" checked>
                 <label for="goat">Heidrun - The Clan of the Goat</label>
                 <a href="https://northgard.fandom.com/wiki/Heidrun" target="_blank"><img src="images/goat.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="wolf" name="clan" value="wolf" checked>
+                <input type="checkbox" id="wolf" name="clan" value="wolf" onclick="clanToggle(this)" checked>
                 <label for="wolf">Fenrir - The Clan of the Wolf</label>
                 <a href="https://northgard.fandom.com/wiki/Fenrir" target="_blank"><img src="images/wolf.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="raven" name="clan" value="raven" checked>
+                <input type="checkbox" id="raven" name="clan" value="raven" onclick="clanToggle(this)" checked>
                 <label for="raven">Huginn and Muninn - The Clan of the Raven</label>
                 <a href="https://northgard.fandom.com/wiki/Huginn_and_Muninn" target="_blank"><img src="images/raven.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="bear" name="clan" value="bear" checked>
+                <input type="checkbox" id="bear" name="clan" value="bear" onclick="clanToggle(this)" checked>
                 <label for="bear">Bjarki - The Clan of the Bear</label>
                 <a href="https://northgard.fandom.com/wiki/Bjarki" target="_blank"><img src="images/bear.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="boar" name="clan" value="boar" checked>
+                <input type="checkbox" id="boar" name="clan" value="boar" onclick="clanToggle(this)" checked>
                 <label for="boar">Slidrugtanni - The Clan of the Boar</label>
                 <a href="https://northgard.fandom.com/wiki/Slidrugtanni" target="_blank"><img src="images/boar.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="snake" name="clan" value="snake" checked>
+                <input type="checkbox" id="snake" name="clan" value="snake" onclick="clanToggle(this)" checked>
                 <label for="snake">Sváfnir - The Clan of the Snake</label>
                 <a href="https://northgard.fandom.com/wiki/Sváfnir" target="_blank"><img src="images/snake.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="dragon" name="clan" value="dragon" checked>
+                <input type="checkbox" id="dragon" name="clan" value="dragon" onclick="clanToggle(this)" checked>
                 <label for="dragon">Nidhogg - The Clan of the Dragon</label>
                 <a href="https://northgard.fandom.com/wiki/Nidhogg" target="_blank"><img src="images/dragon.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="horse" name="clan" value="horse" checked>
+                <input type="checkbox" id="horse" name="clan" value="horse" onclick="clanToggle(this)" checked>
                 <label for="horse">Svadilfari - The Clan of the Horse</label>
                 <a href="https://northgard.fandom.com/wiki/Svadilfari" target="_blank"><img src="images/horse.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="kraken" name="clan" value="kraken" checked>
+                <input type="checkbox" id="kraken" name="clan" value="kraken" onclick="clanToggle(this)" checked>
                 <label for="kraken">Lyngbakr - The Clan of the Kraken</label>
                 <a href="https://northgard.fandom.com/wiki/Lyngbakr" target="_blank"><img src="images/kraken.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="ox" name="clan" value="ox" checked>
+                <input type="checkbox" id="ox" name="clan" value="ox" onclick="clanToggle(this)" checked>
                 <label for="ox">Himminbrjotir - The Clan of the Ox</label>
                 <a href="https://northgard.fandom.com/wiki/Himminbrjotir" target="_blank"><img src="images/ox.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="lynx" name="clan" value="lynx" checked>
+                <input type="checkbox" id="lynx" name="clan" value="lynx" onclick="clanToggle(this)" checked>
                 <label for="lynx">Brundr and Kaelinn - The Clan of the Lynx</label>
                 <a href="https://northgard.fandom.com/wiki/Brundr_and_Kaelinn" target="_blank"><img src="images/lynx.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="squirrel" name="clan" value="squirrel" checked>
+                <input type="checkbox" id="squirrel" name="clan" value="squirrel" onclick="clanToggle(this)" checked>
                 <label for="squirrel">Ratatoskr - The clan of the Squirrel</label>
                 <a href="https://northgard.fandom.com/wiki/Ratatoskr" target="_blank"><img src="images/squirrel.png"></a>
             </div>
             <div>
-                <input type="checkbox" id="rat" name="clan" value="rat" checked>
+                <input type="checkbox" id="rat" name="clan" value="rat" onclick="clanToggle(this)" checked>
                 <label for="rat">Dodsvagr - The Clan of the Rat</label>
                 <a href="https://northgard.fandom.com/wiki/Dodsvagr" target="_blank"><img src="images/rat.png"></a>
             </div>
         </fieldset>
     </main>
+    <script>
+        const excludedClans = new Set(localStorage.getItem("_excluded")?.split(",").filter(it => it != "") || []);
+        document.querySelectorAll("input[type=checkbox]").forEach(it => {
+            if (excludedClans.has(it.value)) {
+                it.checked = false;
+            }
+        });
+    </script>
 </body>
 </html>
